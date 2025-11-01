@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sfin-pay-site-v2/static/css/main.29a4a6f0.css",
+    "main.js": "/sfin-pay-site-v2/static/js/main.3a5ee493.js",
+    "static/js/453.e036e791.chunk.js": "/sfin-pay-site-v2/static/js/453.e036e791.chunk.js",
+    "index.html": "/sfin-pay-site-v2/index.html",
+    "main.29a4a6f0.css.map": "/sfin-pay-site-v2/static/css/main.29a4a6f0.css.map",
+    "main.3a5ee493.js.map": "/sfin-pay-site-v2/static/js/main.3a5ee493.js.map",
+    "453.e036e791.chunk.js.map": "/sfin-pay-site-v2/static/js/453.e036e791.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29a4a6f0.css",
+    "static/js/main.3a5ee493.js"
+  ]
+}
