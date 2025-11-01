@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/sfin-pay-site-v2/static/css/main.279200af.css",
-    "main.js": "/sfin-pay-site-v2/static/js/main.f2242500.js",
-    "static/js/977.af41dc32.chunk.js": "/sfin-pay-site-v2/static/js/977.af41dc32.chunk.js",
-    "static/js/455.d30c4d41.chunk.js": "/sfin-pay-site-v2/static/js/455.d30c4d41.chunk.js",
-    "static/js/453.e036e791.chunk.js": "/sfin-pay-site-v2/static/js/453.e036e791.chunk.js",
+    "main.css": "/sfin-pay-site-v2/static/css/main.697dd532.css",
+    "main.js": "/sfin-pay-site-v2/static/js/main.d49181c2.js",
+    "static/js/977.5dd3c8aa.chunk.js": "/sfin-pay-site-v2/static/js/977.5dd3c8aa.chunk.js",
+    "static/js/455.cde9ae53.chunk.js": "/sfin-pay-site-v2/static/js/455.cde9ae53.chunk.js",
+    "static/js/453.bc288528.chunk.js": "/sfin-pay-site-v2/static/js/453.bc288528.chunk.js",
     "index.html": "/sfin-pay-site-v2/index.html",
-    "main.279200af.css.map": "/sfin-pay-site-v2/static/css/main.279200af.css.map",
-    "main.f2242500.js.map": "/sfin-pay-site-v2/static/js/main.f2242500.js.map",
-    "977.af41dc32.chunk.js.map": "/sfin-pay-site-v2/static/js/977.af41dc32.chunk.js.map",
-    "455.d30c4d41.chunk.js.map": "/sfin-pay-site-v2/static/js/455.d30c4d41.chunk.js.map",
-    "453.e036e791.chunk.js.map": "/sfin-pay-site-v2/static/js/453.e036e791.chunk.js.map"
+    "main.697dd532.css.map": "/sfin-pay-site-v2/static/css/main.697dd532.css.map",
+    "main.d49181c2.js.map": "/sfin-pay-site-v2/static/js/main.d49181c2.js.map",
+    "977.5dd3c8aa.chunk.js.map": "/sfin-pay-site-v2/static/js/977.5dd3c8aa.chunk.js.map",
+    "455.cde9ae53.chunk.js.map": "/sfin-pay-site-v2/static/js/455.cde9ae53.chunk.js.map",
+    "453.bc288528.chunk.js.map": "/sfin-pay-site-v2/static/js/453.bc288528.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.279200af.css",
-    "static/js/main.f2242500.js"
+    "static/css/main.697dd532.css",
+    "static/js/main.d49181c2.js"
   ]
 }
