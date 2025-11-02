@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksfin_pay_site_v2=self.webpackChunksfin_pay_site_v2||[]).push([[818],{1818:(e,t,n)=>{n.r(t),n.d(t,{default:()=>f});var s=n(5043),a=n(3216);function f(){const{pathname:e}=(0,a.zy)();return(0,s.useEffect)(()=>{window.scrollTo({top:0,left:0,behavior:"instant"})},[e]),null}}}]);
+//# sourceMappingURL=818.2d069437.chunk.js.map
