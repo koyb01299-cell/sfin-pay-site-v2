@@ -98,7 +98,7 @@ export default function Service() {
               <Wallet />
             </div>
             <p className="font-semibold mt-2">정산 완료</p>
-            <p className="text-sm text-[#4b3a6b]/70">R+0 · R+1 정산 자동처리</p>
+            <p className="text-sm text-[#4b3a6b]/70">D+0 · D+1 정산 자동처리</p>
           </div>
         </motion.div>
 
@@ -106,7 +106,7 @@ export default function Service() {
           {...fadeUp(0.4)}
           className="text-center mt-10 text-[#4b3a6b]/70 max-w-3xl mx-auto leading-relaxed"
         >
-          예약 → 결제 → 정산까지 완전 자동화.  
+          예약 → 결제 → 정산까지 완전 자동화.
           고객 관리와 회계가 하나의 시스템으로 통합됩니다.
         </motion.p>
       </section>

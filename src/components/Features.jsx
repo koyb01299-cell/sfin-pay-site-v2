@@ -63,16 +63,22 @@ export default function Features() {
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7c3aed]/10 text-[#6d28d9] text-sm font-medium">
           🌟 주요 혜택
         </span>
-        <h2 className="mt-5 text-4xl md:text-5xl font-extrabold leading-tight text-[#1f1631]">
-          가맹점을 위한  
+
+        {/* 💎 제목: 두 줄 간격 확장 */}
+        <h2 className="mt-6 text-4xl md:text-5xl font-extrabold leading-relaxed text-[#1f1631] tracking-tight">
+          가맹점을 위한
           <br className="hidden sm:block" />
-          <span className="text-[#7c3aed]">결제 · 정산 올인원 서비스</span>
+          <span className="block mt-3 text-[#7c3aed]">
+            결제 · 정산 올인원 서비스
+          </span>
         </h2>
-        <p className="mt-5 text-[#4b3a6b]/80 text-lg leading-relaxed">
-          번거로운 계약 절차나 기술 지식 없이도,  
+
+        <p className="mt-8 text-[#4b3a6b]/80 text-lg leading-relaxed">
+          번거로운 계약 절차나 기술 지식 없이도,
           <br className="hidden sm:block" /> 결제부터 정산, 리포트까지 한 번에 관리할 수 있습니다.
         </p>
       </motion.div>
+
 
       {/* 혜택 카드 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

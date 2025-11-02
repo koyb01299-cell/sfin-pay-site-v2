@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -13,6 +13,13 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+const fadeUp = (i = 0) => ({
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.6, delay: i * 0.1 },
+});
+
 export default function B2B() {
   const [mounted, setMounted] = useState(false);
 
@@ -20,13 +27,6 @@ export default function B2B() {
     window.scrollTo(0, 0);
     setMounted(true);
   }, []);
-
-  const fadeUp = (i = 0) => ({
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.3 },
-    transition: { duration: 0.6, delay: i * 0.1 },
-  });
 
   return (
     <div className="min-h-screen bg-[#faf8ff] text-[#1f1631] pt-32">
@@ -52,7 +52,10 @@ export default function B2B() {
 
       {/* ✨ B2B 결제 흐름 시각화 */}
       <section className="py-24 px-6 md:px-16 bg-[#f4f0ff] relative overflow-hidden">
-        <motion.h2 {...fadeUp(0)} className="text-4xl font-bold text-center mb-12">
+        <motion.h2
+          {...fadeUp(0)}
+          className="text-4xl font-bold text-center mb-12"
+        >
           기업 간 정산 프로세스
         </motion.h2>
 
@@ -99,7 +102,7 @@ export default function B2B() {
               <Wallet />
             </div>
             <p className="font-semibold mt-2">정산 완료</p>
-            <p className="text-sm text-[#4b3a6b]/70">R+0 · R+1 대량 정산</p>
+            <p className="text-sm text-[#4b3a6b]/70">D+0 · D+1 대량 정산</p>
           </div>
         </motion.div>
 
@@ -187,7 +190,6 @@ export default function B2B() {
           반복적인 업무를 줄이고, 정확한 정산을 경험해보세요.
         </motion.p>
 
-        {/* ✅ 상담 페이지 이동 */}
         <Link to="/inquiry/contract">
           <motion.button
             {...fadeUp(0.4)}

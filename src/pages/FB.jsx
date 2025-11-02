@@ -106,7 +106,7 @@ export default function FB() {
             </div>
             <p className="font-semibold mt-2">가맹점 계좌</p>
             <p className="text-sm text-[#4b3a6b]/70">
-              R+0 또는 R+1 입금 완료
+              D+0 또는 D+1 입금 완료
             </p>
           </motion.div>
         </div>

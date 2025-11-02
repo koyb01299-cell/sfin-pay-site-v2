@@ -1,0 +1,23 @@
+OS SSD 볼륨에 대한 폴더 경로의 목록입니다.
+볼륨 일련 번호는 48E7-FC7B입니다.
+C:.
+    API.jsx
+    Compliance.jsx
+    Contact.jsx
+    ContactForm.jsx
+    Features.jsx
+    Footer.jsx
+    Hero.jsx
+    Insights.jsx
+    Liquidity.jsx
+    Navbar.jsx
+    Partners.jsx
+    ScrollToTop.jsx
+    Security.jsx
+    SecurityPolicyPDFGenerator.jsx
+    Settlement.jsx
+    SettlementComparison.jsx
+    structure.txt
+    
+
+에 하위 폴더가 없습니다.

@@ -36,7 +36,7 @@ export default function OnlinePay() {
           </span>
         </motion.h1>
         <motion.p {...fadeUp(0.2)} className="text-lg md:text-xl text-[#4b3a6b]/80 max-w-3xl mx-auto">
-          카드, 간편결제, 수기결제까지 —  
+          카드, 간편결제, 수기결제까지 —
           한 인터페이스에서 통합 관리하세요.
         </motion.p>
 
@@ -68,11 +68,10 @@ export default function OnlinePay() {
             <button
               key={t}
               onClick={() => setActiveTab(t)}
-              className={`px-8 py-3 rounded-full text-lg font-medium transition-all ${
-                activeTab === t
+              className={`px-8 py-3 rounded-full text-lg font-medium transition-all ${activeTab === t
                   ? "bg-[#7c3aed] text-white shadow-md"
                   : "bg-white border border-[#c4b5fd]/50 text-[#4b3a6b] hover:text-[#7c3aed]"
-              }`}
+                }`}
             >
               {t === "auto" ? "자동결제" : "수기결제"}
             </button>
@@ -135,7 +134,7 @@ export default function OnlinePay() {
             { icon: <ShieldCheck size={28} />, title: "보안 인증 완비", desc: "PG 보안 규격, 3D Secure, PCI-DSS 준수" },
             { icon: <BarChart3 size={28} />, title: "리포트 & 통계", desc: "실시간 매출 추이, 거래 성공률 대시보드" },
             { icon: <Globe2 size={28} />, title: "글로벌 결제 지원", desc: "해외 카드 및 다국적 통화 결제 지원" },
-            { icon: <Wallet size={28} />, title: "자동 정산", desc: "R+0 / R+1 입금 및 세금계산 자동 반영" },
+            { icon: <Wallet size={28} />, title: "자동 정산", desc: "D+0 / D+1 입금 및 세금계산 자동 반영" },
           ].map((f, i) => (
             <motion.div
               key={i}
@@ -161,7 +160,7 @@ export default function OnlinePay() {
           </span>
         </motion.h2>
         <motion.p {...fadeUp(0.2)} className="text-[#4b3a6b]/90 text-lg mb-10 leading-relaxed">
-          자동·수기결제 모두 지원하는 통합 결제 솔루션으로  
+          자동·수기결제 모두 지원하는 통합 결제 솔루션으로
           고객 경험을 혁신하세요.
         </motion.p>
         <Link to="/inquiry/contract">

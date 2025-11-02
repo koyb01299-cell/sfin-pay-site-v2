@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Users,
   Briefcase,
@@ -165,14 +166,15 @@ export default function CompanyIntro() {
           ))}
         </div>
 
-        <motion.button
-          {...fadeUp(0.4)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-10 py-5 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#9f6bff] hover:from-[#6d28d9] hover:to-[#9f6bff] text-white font-semibold text-lg shadow-[0_8px_25px_rgba(124,58,237,0.25)] transition-all"
-        >
-          채용 및 파트너 문의 →
-        </motion.button>
+        {/* ✅ 기존 motion.button → Link로 교체 */}
+        <motion.div {...fadeUp(0.4)}>
+          <Link
+            to="/recruit"
+            className="inline-flex items-center justify-center px-10 py-5 rounded-xl bg-gradient-to-r from-[#7c3aed] to-[#9f6bff] hover:from-[#6d28d9] hover:to-[#9f6bff] text-white font-semibold text-lg shadow-[0_8px_25px_rgba(124,58,237,0.25)] transition-all"
+          >
+            채용 및 파트너 문의 →
+          </Link>
+        </motion.div>
       </section>
     </div>
   );

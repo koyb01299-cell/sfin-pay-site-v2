@@ -34,16 +34,20 @@ export default function API() {
       className="relative py-28 px-6 md:px-16 bg-gradient-to-b from-[#f8f7ff] to-[#f3f1fa]"
     >
       {/* 헤더 */}
-      <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-16">
+      <motion.div {...fadeUp(0)} className="text-center max-w-3xl mx-auto mb-20">
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7c3aed]/10 text-[#7c3aed] text-sm font-medium">
           <Rocket size={16} /> 도입 절차
         </span>
-        <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#1f1631] leading-tight">
-          누구나 바로 사용할 수 있는  
-          <br /> <span className="text-[#7c3aed]">결제 인프라</span>
+
+        {/* 💎 제목 간격 개선 */}
+        <h2 className="mt-8 text-4xl md:text-5xl font-extrabold text-[#1f1631] leading-relaxed tracking-tight">
+          누구나 바로 사용할 수 있는
+          <br className="hidden sm:block" />
+          <span className="block mt-3 text-[#7c3aed]">결제 인프라</span>
         </h2>
-        <p className="mt-5 text-[#4b3a6b]/80 text-lg leading-relaxed">
-          복잡한 서류나 별도 시스템 없이,  
+
+        <p className="mt-8 text-[#4b3a6b]/80 text-lg leading-relaxed">
+          복잡한 서류나 별도 시스템 없이,
           <br /> 가입부터 결제 운영까지 단 하루면 충분합니다.
         </p>
       </motion.div>
@@ -66,7 +70,7 @@ export default function API() {
       {/* 안내 문구 */}
       <motion.div {...fadeUp(4)} className="max-w-3xl mx-auto text-center mt-16">
         <p className="text-[#4b3a6b]/80 text-lg leading-relaxed">
-          SFIN PAY는 가맹점 등록, 정산 관리, 결제 모듈 제공을 하나의 프로세스로 통합했습니다.  
+          SFIN PAY는 가맹점 등록, 정산 관리, 결제 모듈 제공을 하나의 프로세스로 통합했습니다.
           별도 구축 없이, 안정적이고 빠르게 운영을 시작할 수 있습니다.
         </p>
       </motion.div>

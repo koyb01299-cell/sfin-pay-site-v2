@@ -46,7 +46,7 @@ export default function QrPay() {
           {...fadeUp(0.3)}
           className="text-lg md:text-xl text-[#4b3a6b]/80 max-w-3xl mx-auto leading-relaxed"
         >
-          QR, NFC, 단말기 결제까지 한 번에.  
+          QR, NFC, 단말기 결제까지 한 번에.
           POS 연동과 자동 정산으로 오프라인 결제의 효율을 극대화하세요.
         </motion.p>
       </section>
@@ -86,7 +86,7 @@ export default function QrPay() {
               <Wallet />
             </div>
             <p className="font-semibold mt-2">정산 완료</p>
-            <p className="text-sm text-[#4b3a6b]/70">R+0 또는 R+1 입금</p>
+            <p className="text-sm text-[#4b3a6b]/70">D+0 또는 D+1 입금</p>
           </motion.div>
         </div>
 
@@ -105,7 +105,7 @@ export default function QrPay() {
             📱 오프라인 결제의 혁신
           </h2>
           <p className="text-[#4b3a6b]/80">
-            하드웨어와 소프트웨어의 완벽한 조합으로  
+            하드웨어와 소프트웨어의 완벽한 조합으로
             현장 결제 환경을 개선합니다.
           </p>
         </motion.div>
@@ -170,7 +170,7 @@ export default function QrPay() {
           {...fadeUp(0.2)}
           className="text-[#4b3a6b]/90 text-lg mb-10 leading-relaxed"
         >
-          오프라인 결제의 모든 단계를 자동화하고,  
+          오프라인 결제의 모든 단계를 자동화하고,
           매출 관리의 정확도를 높이세요.
         </motion.p>
         <Link to="/inquiry/contract">

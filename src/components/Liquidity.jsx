@@ -58,17 +58,23 @@ export default function Liquidity() {
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8b5cf6]/10 text-[#7c3aed] text-sm font-medium">
           <HandCoins size={16} /> 정산액 활용형 유동성 시스템
         </span>
-        <h2 className="mt-6 text-4xl md:text-5xl font-extrabold text-[#1f1631] leading-tight">
+
+        {/* 💎 제목 간격 강화 */}
+        <h2 className="mt-8 text-4xl md:text-5xl font-extrabold text-[#1f1631] leading-relaxed tracking-tight">
           <span className="text-[#7c3aed]">데이터가 자산이 되는 순간</span>
           <br className="hidden md:block" />
-          <span className="text-[#9f6bff]">정산 흐름이 금융을 확장합니다</span>
+          <span className="block mt-3 text-[#9f6bff]">
+            정산 흐름이 금융을 확장합니다
+          </span>
         </h2>
-        <p className="mt-5 text-[#4b3a6b]/80 text-lg leading-relaxed">
-          결제와 정산에서 생성되는 데이터를 기반으로,  
-          제휴 금융기관과 연동된 신뢰형 유동성 서비스를 제공합니다.  
+
+        <p className="mt-8 text-[#4b3a6b]/80 text-lg leading-relaxed">
+          결제와 정산에서 생성되는 데이터를 기반으로,
+          제휴 금융기관과 연동된 신뢰형 유동성 서비스를 제공합니다.
           투명한 한도 산출과 자동 심사 시스템으로, 안정적 자금 운용이 가능합니다.
         </p>
       </motion.div>
+
 
       {/* 🔄 데이터 플로우 다이어그램 */}
       <motion.div
@@ -146,7 +152,7 @@ export default function Liquidity() {
             </h3>
           </div>
           <p className="text-[#4b3a6b]/80 text-sm leading-relaxed mb-6">
-            정산 데이터를 기반으로 자동 한도를 산출합니다.  
+            정산 데이터를 기반으로 자동 한도를 산출합니다.
             실시간 리스크 검증 후, 제휴 금융기관과 즉시 연동됩니다.
           </p>
           <ul className="space-y-2 text-[#4b3a6b]/70 text-sm">
@@ -174,7 +180,7 @@ export default function Liquidity() {
             </h3>
           </div>
           <p className="text-[#4b3a6b]/80 text-sm leading-relaxed mb-6">
-            정산 패턴이 일정하게 유지되면 한도가 자동 갱신됩니다.  
+            정산 패턴이 일정하게 유지되면 한도가 자동 갱신됩니다.
             계절형 매장, 스타트업, 프로젝트성 매출에도 유연하게 대응합니다.
           </p>
           <ul className="space-y-2 text-[#4b3a6b]/70 text-sm">

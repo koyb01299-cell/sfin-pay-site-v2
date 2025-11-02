@@ -98,7 +98,7 @@ export default function Distribution() {
               <Building2 />
             </div>
             <p className="font-semibold mt-2">입금 완료</p>
-            <p className="text-sm text-[#4b3a6b]/70">R+0 또는 R+1 정산</p>
+            <p className="text-sm text-[#4b3a6b]/70">D+0 또는 D+1 정산</p>
           </div>
         </motion.div>
 
