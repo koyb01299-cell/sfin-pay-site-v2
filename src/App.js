@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useState, Suspense, lazy, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  Suspense,
+  lazy,
+  useMemo,
+} from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,7 +13,11 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+} from "framer-motion";
 
 /* ─────────────────────────────────────────────────────────
     Lazy Load (코드 스플리팅)
@@ -43,36 +54,39 @@ const Careers = lazy(() => import("./pages/Careers"));
 const Recruit = lazy(() => import("./pages/Recruit"));
 const PaymentFAQ = lazy(() => import("./pages/PaymentFAQ"));
 const SecurityPolicy = lazy(() => import("./pages/SecurityPolicy"));
-const TransparencyReport = lazy(() => import("./pages/TransparencyReport"));
-const SettlementInquiry = lazy(() => import("./pages/inquiry/Settlement"));
-const LiquidityInquiry = lazy(() => import("./pages/inquiry/Liquidity"));
-const ContractInquiry = lazy(() => import("./pages/inquiry/Contract"));
-const IntegrationInquiry = lazy(() => import("./pages/inquiry/Integration"));
+const TransparencyReport = lazy(() =>
+  import("./pages/TransparencyReport")
+);
+const SettlementInquiry = lazy(() =>
+  import("./pages/inquiry/Settlement")
+);
+const LiquidityInquiry = lazy(() =>
+  import("./pages/inquiry/Liquidity")
+);
+const ContractInquiry = lazy(() =>
+  import("./pages/inquiry/Contract")
+);
+const IntegrationInquiry = lazy(() =>
+  import("./pages/inquiry/Integration")
+);
 const GeneralInquiry = lazy(() => import("./pages/inquiry/General"));
 
-
 /* ─────────────────────────────────────────────────────────
-    공용: 작은 유틸/훅/컴포넌트(치밀함/안정성 업)
+    유틸리티 훅 및 공용 요소
 ────────────────────────────────────────────────────────── */
-
-/** 라우트 변경 시 최상단 이동 + 해시(anchor)도 지원 */
 function ScrollRestore() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     if (hash) {
-      const id = hash.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
+      const el = document.getElementById(hash.replace("#", ""));
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname, hash]);
   return null;
 }
 
-/** 접근성: 라우트 변경 시 main에 포커스 이동 */
 function RouteFocus() {
   const navType = useNavigationType();
   useEffect(() => {
@@ -82,16 +96,14 @@ function RouteFocus() {
   return null;
 }
 
-/** 섹션 가시성(IntersectionObserver) + data-visible 속성 활용 */
 function useSectionReveal() {
   useEffect(() => {
     const sections = document.querySelectorAll("[data-section]");
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
+          if (e.isIntersecting)
             e.target.setAttribute("data-visible", "true");
-          }
         });
       },
       { threshold: 0.15 }
@@ -101,13 +113,14 @@ function useSectionReveal() {
   }, []);
 }
 
-/** 프리퍼런스: 모션 최소화 지원 */
 function useMotionPref() {
   const reduced = useReducedMotion();
   return { reduced };
 }
 
-/** 배경 Aurora(오로라) 컨트롤러: reduce-motion일 때는 정적 처리 */
+/* ─────────────────────────────────────────────────────────
+    Aurora 배경 (GPU 최적화 + 모바일용 축소)
+────────────────────────────────────────────────────────── */
 function AuroraBackground() {
   const { reduced } = useMotionPref();
   return (
@@ -119,41 +132,51 @@ function AuroraBackground() {
         reduced
           ? { opacity: 1 }
           : {
-            opacity: [0, 0.75, 1],
-            backgroundPosition: ["0% 0%", "100% 50%", "0% 100%", "100% 50%", "0% 0%"],
+            opacity: [0, 0.6, 1],
+            backgroundPosition: [
+              "0% 0%",
+              "100% 50%",
+              "0% 100%",
+              "100% 50%",
+              "0% 0%",
+            ],
           }
       }
       transition={
         reduced
           ? { duration: 0.8 }
-          : { duration: 160, repeat: Infinity, ease: "easeInOut", delay: 1.2 }
+          : {
+            duration: 120,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.2,
+          }
       }
       style={{
         background:
-          "linear-gradient(120deg, rgba(167,139,250,0.22), rgba(216,180,254,0.22), rgba(192,132,252,0.22))",
+          "linear-gradient(130deg, rgba(167,139,250,0.20), rgba(216,180,254,0.18), rgba(192,132,252,0.20))",
         backgroundSize: "400% 400%",
-        filter: "blur(150px)",
+        filter: "blur(120px)",
       }}
     />
   );
 }
 
-/** 얇은 섹션 구분선(연보라) + 배경 미세 오버레이(가독성 ↑) */
 function SectionWrapper({ id, children }) {
-  // 배경 오버레이 강도 균일화: 세부 색감은 상위 그라데이션에 맡기고,
-  // 텍스트 대비만 살짝 올림
   return (
     <section
       id={id}
       data-section
-      className="relative border-t border-[#e8defa]/30 bg-white/30 backdrop-blur-[1px]"
+      className="relative border-t border-[#e8defa]/30 bg-white/40 backdrop-blur-[1px] px-4 sm:px-6 md:px-12 py-12 md:py-20"
     >
       {children}
     </section>
   );
 }
 
-/** 에러 바운더리 */
+/* ─────────────────────────────────────────────────────────
+    에러 & 로딩 상태
+────────────────────────────────────────────────────────── */
 class AppErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -170,9 +193,11 @@ class AppErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-8">
-          <h1 className="text-2xl font-bold text-[#1f1631]">일시적인 오류가 발생했습니다.</h1>
-          <p className="mt-3 text-[#4b3a6b]/80">
+        <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-6 sm:p-8">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#1f1631]">
+            일시적인 오류가 발생했습니다.
+          </h1>
+          <p className="mt-3 text-[#4b3a6b]/80 text-sm sm:text-base">
             새로고침하거나 잠시 후 다시 시도해 주세요.
           </p>
         </div>
@@ -182,35 +207,188 @@ class AppErrorBoundary extends React.Component {
   }
 }
 
-/** Suspense 공통 폴백 */
 function Fallback({ minH = "min-h-[40vh]" }) {
   return (
-    <div className={`flex items-center justify-center ${minH} text-[#7c3aed]`}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      className={`flex items-center justify-center ${minH} text-[#7c3aed] text-sm sm:text-base`}
+    >
       로딩 중입니다...
-    </div>
+    </motion.div>
   );
 }
 
-/** 라우트 진입 시 일부 섹션 사전 로드(체감 성능 개선) */
+function DelayedFallback({ delay = 1000, children }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+  return show ? children : null;
+}
+
 function useWarmupPreload() {
   useEffect(() => {
-    // 아주 가볍게 다음 섹션 번들 힌트(브라우저가 무시하더라도 무해)
-    const links = [
-      { rel: "prefetch", href: "/images/hero/terminal.jpg", as: "image" },
-      { rel: "prefetch", href: "/images/hero/dashboard-card.png", as: "image" },
-      { rel: "prefetch", href: "/images/hero/store-owner.jpg", as: "image" },
+    const imgs = [
+      "/images/hero/terminal.jpg",
+      "/images/hero/dashboard-card.png",
+      "/images/hero/store-owner.jpg",
     ];
-    const els = links.map((l) => {
-      const el = document.createElement("link");
-      Object.assign(el, l);
-      document.head.appendChild(el);
-      return el;
+    imgs.forEach((src) => {
+      const img = new Image();
+      img.src = src;
     });
-    return () => els.forEach((el) => el.remove());
   }, []);
 }
 
-/** 메인 홈 레이아웃(섹션 연결/구분감 최적화) */
+/* ─────────────────────────────────────────────────────────
+    페이지 전환 애니메이션
+────────────────────────────────────────────────────────── */
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{
+          duration: 0.45,
+          ease: "easeInOut",
+        }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+
+          {/* 업종별 추천 */}
+          {[
+            ["fb", FB],
+            ["distribution", Distribution],
+            ["service", Service],
+            ["b2b", B2B],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+
+          {/* 제품소개 */}
+          {[
+            ["online-pay", OnlinePay],
+            ["qr-pay", QRPay],
+            ["device", Device],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+
+          {/* 고객지원 & 기술지원 */}
+          {[
+            ["support", Support],
+            ["tech-support", TechSupport],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+
+          {/* 회사소개 / 비전 / 채용 */}
+          {[
+            ["company", CompanyIntro],
+            ["vision", Vision],
+            ["careers", Careers],
+            ["recruit", Recruit],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+
+          {/* FAQ, 정책, 보고서 */}
+          {[
+            ["payment-faq", PaymentFAQ],
+            ["security-policy", SecurityPolicy],
+            ["transparency-report", TransparencyReport],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+
+          {/* 문의 */}
+          {[
+            ["settlement", SettlementInquiry],
+            ["liquidity", LiquidityInquiry],
+            ["contract", ContractInquiry],
+            ["integration", IntegrationInquiry],
+            ["general", GeneralInquiry],
+          ].map(([path, Comp]) => (
+            <Route
+              key={path}
+              path={`/inquiry/${path}`}
+              element={
+                <SectionWrapper>
+                  <Suspense fallback={<Fallback />}>
+                    <Comp />
+                  </Suspense>
+                </SectionWrapper>
+              }
+            />
+          ))}
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────
+    Home
+────────────────────────────────────────────────────────── */
 function Home() {
   useSectionReveal();
   useWarmupPreload();
@@ -221,84 +399,35 @@ function Home() {
       className="outline-none transition-all duration-300"
       aria-label="SFIN PAY 홈 콘텐츠"
     >
-      {/* Hero는 풀블리드: 가장 가벼운 오버레이 */}
-      <section data-section className="relative bg-white/20 backdrop-blur-[1px]">
+      <section data-section className="relative bg-white/20">
         <Suspense fallback={<Fallback minH="min-h-[80vh]" />}>
           <Hero />
         </Suspense>
       </section>
 
-      {/* 이후부터는 얇은 경계 + 미세 오버레이로 연속성 유지 */}
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Partners />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper id="features">
-        <Suspense fallback={<Fallback />}>
-          <Features />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Settlement />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Liquidity />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Security />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <API />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Insights />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Compliance />
-        </Suspense>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <Suspense fallback={<Fallback />}>
-          <Contact />
-        </Suspense>
-      </SectionWrapper>
+      {[Partners, Features, Settlement, Liquidity, Security, API, Insights, Compliance, Contact].map(
+        (Comp, i) => (
+          <SectionWrapper key={i}>
+            <Suspense fallback={<Fallback />}>
+              <Comp />
+            </Suspense>
+          </SectionWrapper>
+        )
+      )}
     </main>
   );
 }
 
 /* ─────────────────────────────────────────────────────────
-    메인 App
+    App
 ────────────────────────────────────────────────────────── */
 export default function App() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // 배경 클래스(연속 그라데이션) 메모
   const appBgClass = useMemo(
     () =>
-      "relative min-h-screen overflow-x-hidden text-[#1e1b2e] " +
-      "font-['Pretendard','Inter','sans-serif'] " +
-      "bg-gradient-to-b from-[#faf8ff] via-[#f6f3ff] to-[#faf8ff]",
+      "relative min-h-screen overflow-x-hidden text-[#1e1b2e] font-['Pretendard','Inter','sans-serif'] bg-gradient-to-b from-[#faf8ff] via-[#f7f4ff] to-[#faf8ff]",
     []
   );
 
@@ -306,258 +435,24 @@ export default function App() {
     <Router basename={process.env.PUBLIC_URL || "/"}>
       <ScrollRestore />
       <RouteFocus />
-
       <Suspense
         fallback={
-          <div className="flex items-center justify-center min-h-screen bg-[#faf8ff] text-[#7c3aed] text-lg font-semibold">
-            페이지 로딩 중입니다...
-          </div>
+          <DelayedFallback delay={1000}>
+            <div className="flex items-center justify-center min-h-screen bg-[#faf8ff] text-[#7c3aed] text-lg font-semibold">
+              페이지 로딩 중입니다...
+            </div>
+          </DelayedFallback>
         }
       >
         <ScrollToTop />
-
         <div className={appBgClass}>
           {mounted && <AuroraBackground />}
-
           <div className="relative z-10">
             <AppErrorBoundary>
               <Suspense fallback={<Fallback minH="min-h-[64px]" />}>
                 <Navbar />
               </Suspense>
-
-              <Routes>
-                <Route path="/" element={<Home />} />
-
-                {/* 업종별 추천 */}
-                <Route
-                  path="/fb"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <FB />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/distribution"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Distribution />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/service"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Service />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/b2b"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <B2B />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 제품 소개 */}
-                <Route
-                  path="/online-pay"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <OnlinePay />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/qr-pay"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <QRPay />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/device"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Device />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 고객 지원 */}
-                <Route
-                  path="/support"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Support />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 기술 지원 */}
-                <Route
-                  path="/tech-support"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <TechSupport />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-
-                {/* 회사 소개 */}
-                <Route
-                  path="/company"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <CompanyIntro />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/vision"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Vision />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/careers"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Careers />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 채용 및 파트너 문의 */}
-                <Route
-                  path="/recruit"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <Recruit />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* FAQ & 정책 */}
-                <Route
-                  path="/payment-faq"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <PaymentFAQ />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/security-policy"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <SecurityPolicy />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 투명경영 보고서 */}
-                <Route
-                  path="/transparency-report"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <TransparencyReport />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-
-                {/* 문의 상세 */}
-                <Route
-                  path="/inquiry/settlement"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <SettlementInquiry />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/inquiry/liquidity"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <LiquidityInquiry />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/inquiry/contract"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <ContractInquiry />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/inquiry/integration"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <IntegrationInquiry />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-                <Route
-                  path="/inquiry/general"
-                  element={
-                    <SectionWrapper>
-                      <Suspense fallback={<Fallback />}>
-                        <GeneralInquiry />
-                      </Suspense>
-                    </SectionWrapper>
-                  }
-                />
-              </Routes>
-
+              <AnimatedRoutes />
               <Suspense fallback={<Fallback minH="min-h-[200px]" />}>
                 <Footer />
               </Suspense>
